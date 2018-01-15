@@ -1,6 +1,7 @@
-package org.kittyinboots.missilecommanderandroid.gui.guiObjects;
+package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
@@ -9,13 +10,31 @@ import java.util.List;
 public abstract class GuiObject {
     private GuiPosition position;
 
+    int fillColor = Color.TRANSPARENT;
+    int borderColor = Color.TRANSPARENT;
+
     public GuiObject(GuiPosition position) {
         this.position = position;
     }
 
-    abstract List<GuiPosition> getShape();
+    protected abstract List<GuiPosition> getShape();
 
-    abstract Paint getPaint();
+    private Paint getBorderPaint() {
+        Paint paint = new Paint();
+        paint.setColor(borderColor);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        return paint;
+    }
+
+    private Paint getFillPaint() {
+        Paint paint = new Paint();
+        paint.setColor(fillColor);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        return paint;
+    }
+
 
     private Path getPath() {
         Path path = new Path();
@@ -35,6 +54,7 @@ public abstract class GuiObject {
     }
 
     public void onDraw(Canvas canvas) {
-        canvas.drawPath(getPath(), getPaint());
+        canvas.drawPath(getPath(), getFillPaint());
+        canvas.drawPath(getPath(), getBorderPaint());
     }
 }

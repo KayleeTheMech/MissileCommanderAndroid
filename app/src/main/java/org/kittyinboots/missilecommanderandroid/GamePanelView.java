@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
-import org.kittyinboots.missilecommanderandroid.gui.guiObjects.GuiObject;
-import org.kittyinboots.missilecommanderandroid.gui.guiObjects.GuiPosition;
-import org.kittyinboots.missilecommanderandroid.gui.guiObjects.MissileGuiObject;
+import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObject;
+import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiPosition;
+import org.kittyinboots.missilecommanderandroid.gui.gameElements.MissileGuiObject;
 
 import java.util.ArrayList;
 import java.util.List;

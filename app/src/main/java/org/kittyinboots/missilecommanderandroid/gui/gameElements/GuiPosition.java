@@ -1,4 +1,4 @@
-package org.kittyinboots.missilecommanderandroid.gui.guiObjects;
+package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
 
 public class GuiPosition {
