@@ -5,16 +5,34 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.FlightObject;
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
+
 import java.util.List;
 
 public abstract class GuiObject {
-    private GuiPosition position;
+    private GameObject gameObject;
+    private GuiPosition direction;
+    private GuiPosition centerOfMass;
+
+
+    private static double stretchX = ((double) WindowWidth) / ((double) GAME_BOARD_WIDTH);
+    private static double stretchY = ((double) WindowHeight) / ((double) GAME_BOARD_HEIGHT);
 
     int fillColor = Color.TRANSPARENT;
     int borderColor = Color.TRANSPARENT;
 
-    public GuiObject(GuiPosition position) {
-        this.position = position;
+    public GuiObject(GameObject gameObject) {
+
+
+
+        this.gameObject = gameObject;
+
+
+        if (gameObject instanceof FlightObject) {
+            this.direction = new GuiPosition(((FlightObject) gameObject).getTargetVector());
+        }
+        this.centerOfMass = new GuiPosition(gameObject.getPosition());
     }
 
     protected abstract List<GuiPosition> getShape();
@@ -37,6 +55,7 @@ public abstract class GuiObject {
 
 
     private Path getPath() {
+        GuiPosition position = new GuiPosition(100, 100);
         Path path = new Path();
         if (getShape().size() > 0) {
             GuiPosition p = getShape().get(0);
