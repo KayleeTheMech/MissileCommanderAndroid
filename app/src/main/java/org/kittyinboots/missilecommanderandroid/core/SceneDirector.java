@@ -24,7 +24,7 @@ public class SceneDirector {
     //fixme inject the eventBus
     private EventBus eventBus;
     private Core core;
-    private Controller controller;
+    // private Controller controller;
     private SceneAssistant assistant;
 
     public SceneDirector(EventBus eventBus) {
@@ -98,7 +98,7 @@ public class SceneDirector {
         frames = 0;
         core = deactivateAndReturnObject(core, new Core(eventBus));
         assistant = deactivateAndReturnObject(assistant, new SceneAssistant(eventBus, core));
-        controller = deactivateAndReturnObject(controller, new Controller(core, this));
+        // controller = deactivateAndReturnObject(controller, new Controller(core, this));
 
         eventBus.post(NEW_GAME_HAS_BEGUN);
         difficulty = 1;
@@ -117,18 +117,18 @@ public class SceneDirector {
      * Pauses the game
      */
     public void pause() {
-        if (controller != null) {
-            controller.pause();
-        }
+       // if (controller != null) {
+       //     controller.pause();
+       // }
     }
 
     /**
      * Resumes from pause
      */
     public void resume() {
-        if (controller != null) {
-            controller.resume();
-        }
+       // if (controller != null) {
+       //     controller.resume();
+       // }
     }
 
     /**
@@ -141,12 +141,13 @@ public class SceneDirector {
     }
 
     private void fireMissile(Position p) {
+        /*
         if (!controller.isPaused()) {
             assistant.shootMissile(p);
         } else {
             resume();
         }
-
+        */
     }
 
     /**

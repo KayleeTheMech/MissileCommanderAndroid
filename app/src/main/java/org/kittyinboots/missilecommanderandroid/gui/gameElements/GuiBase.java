@@ -1,28 +1,26 @@
 package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
+import android.graphics.Color;
 
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.Base;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.shapes.BaseShape;
 
 import java.util.List;
 
-public class BaseGuiObject extends GuiObject {
+public class GuiBase extends GuiObject {
 
     static final long serialVersionUID = 2001;
     private static final BaseShape baseShape = new BaseShape();
 
-    public BaseGuiObject(GuiPosition position) {
-        super(position);
+
+    GuiBase(Base base) {
+        super(base);
+
+        initialize();
+        fillColor = Color.WHITE;
+        borderColor = Color.WHITE;
     }
 
-    /*
-        BaseGuiObject(Base base) {
-            super(base);
-
-            initialize();
-            fillColor = Color.white;
-            borderColor = Color.white;
-        }
-    */
     @Override
     protected List<GuiPosition> getShape() {
         return baseShape.getMyShape();

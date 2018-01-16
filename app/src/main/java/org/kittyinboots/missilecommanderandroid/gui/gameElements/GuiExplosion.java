@@ -1,28 +1,28 @@
 package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
 
+import android.graphics.Color;
+
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.Explosion;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class ExplosionGuiObject extends GuiObject {
+public class GuiExplosion extends GuiObject {
 
     final static long serialVersionUID = 2001;
 
-    public ExplosionGuiObject(GuiPosition position) {
-        super(position);
+    GuiExplosion(Explosion explosion) {
+        super(explosion);
+        initialize();
+        fillColor = Color.YELLOW;
+        borderColor = Color.RED;
     }
 
-    /*
-        ExplosionGuiObject(Explosion explosion) {
-            super(explosion);
-            initialize();
-            fillColor = Color.yellow;
-            borderColor = Color.red;
-        }
-    */
     @Override
     public List<GuiPosition> getShape() {
-        /*
-        int radius = ((Explosion) this.gameObject).getDetonationRadius();
+        //fixme SCALE radius to resolution
+        int radius = this.gameObject.getDetonationRadius();
         int numberOfPoints = (int) (radius * 2 * Math.PI) / 4;
         double winkelabschnitt = 2 * Math.PI / numberOfPoints;
 
@@ -37,7 +37,5 @@ public class ExplosionGuiObject extends GuiObject {
             points.add(new GuiPosition(x, y));
         }
         return points;
-            */
-        return null;
     }
 }

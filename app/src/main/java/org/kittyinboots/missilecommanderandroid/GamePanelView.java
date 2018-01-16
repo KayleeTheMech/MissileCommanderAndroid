@@ -7,14 +7,17 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiMissile;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObject;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiPosition;
-import org.kittyinboots.missilecommanderandroid.gui.gameElements.MissileGuiObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback {
+
+    private static int windowHeight = -1;
+    private static int windowWidth = -1;
 
     List<GuiObject> gameObjects;
 
@@ -37,7 +40,6 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
         this.setFocusable(true);
         this.getHolder().addCallback(this);
         gameObjects = new ArrayList<>();
-        gameObjects.add(new MissileGuiObject(new GuiPosition(100, 100)));
     }
 
     @Override
@@ -61,10 +63,20 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        windowWidth = this.getMeasuredWidth();
+        windowHeight = this.getMeasuredHeight();
 
         for (GuiObject obj : gameObjects) {
             obj.onDraw(canvas);
         }
+    }
+
+    public static int getWindowWidth() {
+        return windowWidth;
+    }
+
+    public static int getWindowHeight() {
+        return windowHeight;
     }
 
 }
