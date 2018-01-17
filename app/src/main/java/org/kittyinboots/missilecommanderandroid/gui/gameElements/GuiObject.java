@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-import org.kittyinboots.missilecommanderandroid.GamePanelView;
+import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 import org.kittyinboots.missilecommanderandroid.core.gameObjects.FlightObject;
 import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
 

@@ -1,6 +1,6 @@
 package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
-import org.kittyinboots.missilecommanderandroid.GamePanelView;
+import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 import org.kittyinboots.missilecommanderandroid.core.Position;
 
 import static org.kittyinboots.missilecommanderandroid.core.Core.GAME_BOARD_HEIGHT;

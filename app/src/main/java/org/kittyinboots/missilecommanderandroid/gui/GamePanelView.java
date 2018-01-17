@@ -1,4 +1,4 @@
-package org.kittyinboots.missilecommanderandroid;
+package org.kittyinboots.missilecommanderandroid.gui;
 
 import android.content.Context;
 import android.graphics.Canvas;

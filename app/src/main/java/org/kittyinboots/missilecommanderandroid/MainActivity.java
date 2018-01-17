@@ -1,10 +1,11 @@
 package org.kittyinboots.missilecommanderandroid;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 
 public class MainActivity extends Activity {
 
