@@ -16,6 +16,7 @@ import static org.kittyinboots.missilecommanderandroid.core.Core.GAME_BOARD_WIDT
 
 public abstract class GuiObject {
 
+    private Path path;
     protected GameObject gameObject;
     private GuiPosition direction;
     private GuiPosition centerOfMass;
@@ -62,17 +63,16 @@ public abstract class GuiObject {
 
 
     private Path getPath() {
-        GuiPosition position = new GuiPosition(100, 100);
         Path path = new Path();
         if (getShape().size() > 0) {
             GuiPosition p = getShape().get(0);
-            path.moveTo(p.getX() + position.getX(), p.getY() + position.getY());
+            path.moveTo(p.getX(), p.getY());
             for (int i = 1; i < getShape().size(); i++) {
                 p = getShape().get(i);
-                path.lineTo(p.getX() + position.getX(), p.getY() + position.getY());
+                path.lineTo(p.getX(), p.getY());
             }
             p = getShape().get(0);
-            path.lineTo(p.getX() + position.getX(), p.getY() + position.getY());
+            path.lineTo(p.getX(), p.getY());
             return path;
         } else {
             return path;
@@ -80,8 +80,10 @@ public abstract class GuiObject {
     }
 
     public void onDraw(Canvas canvas) {
-        canvas.drawPath(getPath(), getFillPaint());
-        canvas.drawPath(getPath(), getBorderPaint());
+        this.path = getPath();
+        path.offset(centerOfMass.getX(), centerOfMass.getY());
+        canvas.drawPath(path, getFillPaint());
+        canvas.drawPath(path, getBorderPaint());
     }
 
     //FIXME old methods
@@ -102,28 +104,6 @@ public abstract class GuiObject {
             int yOld = y[i];
             x[i] = (int) (xOld * Math.cos(alpha) - yOld * Math.sin(alpha));
             y[i] = -(int) (xOld * Math.sin(alpha) + yOld * Math.cos(alpha));
-        }
-        */
-    }
-
-    /**
-     * Moving the polygon array to the position on screen
-     */
-    private void moveShapeArrays() {
-        /*
-        if (centerOfMass == null) {
-            throw new RuntimeException("Class not correctly extended. To move the array there needs to be a center of mass.");
-
-        }
-        for (int i = 0; i < (x.length + y.length) / 2; i++) {
-            x[i] = centerOfMass.getX() + x[i];
-            if (x[i] < 0) {
-                x[i] = 0;
-            }
-            y[i] = centerOfMass.getY() + y[i];
-            if (y[i] < 0) {
-                y[i] = 0;
-            }
         }
         */
     }
