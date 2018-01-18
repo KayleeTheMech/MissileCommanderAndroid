@@ -7,8 +7,15 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import com.google.common.eventbus.EventBus;
+
+import org.kittyinboots.missilecommanderandroid.core.Position;
+import org.kittyinboots.missilecommanderandroid.core.SceneDirector;
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.Missile;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiMissile;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObject;
+import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObjectFactory;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiPosition;
 
 import java.util.ArrayList;
@@ -18,28 +25,35 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
 
     private static int windowHeight = -1;
     private static int windowWidth = -1;
+    EventBus eventBus;
+    SceneDirector director;
+    private GuiObjectFactory factory;
 
-    List<GuiObject> gameObjects;
-
-    public GamePanelView(Context context) {
+    public GamePanelView(Context context, EventBus eventBus,
+                         SceneDirector director) {
         super(context);
-        initialize(context, null, 0);
+        initialize(context, null, 0, eventBus, director);
     }
 
-    public GamePanelView(Context context, AttributeSet attrs) {
+    public GamePanelView(Context context, AttributeSet attrs, EventBus eventBus,
+                         SceneDirector director) {
         super(context, attrs);
-        initialize(context, attrs, 0);
+        initialize(context, attrs, 0, eventBus, director);
     }
 
-    public GamePanelView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GamePanelView(Context context, AttributeSet attrs, int defStyleAttr, EventBus eventBus,
+                         SceneDirector director) {
         super(context, attrs, defStyleAttr);
-        initialize(context, attrs, defStyleAttr);
+        initialize(context, attrs, defStyleAttr, eventBus, director);
     }
 
-    private void initialize(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    private void initialize(Context context, @Nullable AttributeSet attrs, int defStyleAttr, EventBus eventBus,
+                            SceneDirector director) {
         this.setFocusable(true);
         this.getHolder().addCallback(this);
-        gameObjects = new ArrayList<>();
+        this.director = director;
+        this.eventBus = eventBus;
+        factory = new GuiObjectFactory();
     }
 
     @Override
@@ -66,9 +80,21 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
         windowWidth = this.getMeasuredWidth();
         windowHeight = this.getMeasuredHeight();
 
-        for (GuiObject obj : gameObjects) {
-            obj.onDraw(canvas);
+        List<GameObject> gameObjects = new ArrayList<>();
+        //director.getGameObjects();
+        Missile object = new Missile();
+        object.setPosition(new Position(0, 100));
+        object.setTargetVector(new Position(0, 0));
+        gameObjects.add(object);
+        for (GameObject obj : gameObjects) {
+            GuiObject graphicalObject = factory.getGUIObject(obj);
+            graphicalObject.onDraw(canvas);
         }
+
+        if (!director.isGameOngoing()) {
+            // draw game over if over
+        }
+        // console?
     }
 
     public static int getWindowWidth() {

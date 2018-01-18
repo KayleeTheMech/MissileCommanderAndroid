@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.common.eventbus.EventBus;
+
+import org.kittyinboots.missilecommanderandroid.core.SceneDirector;
 import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 
 public class MainActivity extends Activity {
@@ -15,6 +18,10 @@ public class MainActivity extends Activity {
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.setContentView(new GamePanelView(this));
+
+        EventBus eventBus = new EventBus();
+        SceneDirector director = new SceneDirector(eventBus);
+        director.newGame();
+        this.setContentView(new GamePanelView(this, eventBus, director));
     }
 }
