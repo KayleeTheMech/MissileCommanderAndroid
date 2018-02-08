@@ -2,6 +2,7 @@ package org.kittyinboots.missilecommanderandroid.gui.gameElements;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 
@@ -35,6 +36,8 @@ public abstract class GuiObject {
             this.direction = new GuiPosition(((FlightObject) gameObject).getTargetVector());
         }
         this.centerOfMass = new GuiPosition(gameObject.getPosition());
+
+        this.path = getPath();
     }
 
     /**
@@ -80,7 +83,6 @@ public abstract class GuiObject {
     }
 
     public void onDraw(Canvas canvas) {
-        this.path = getPath();
         path.offset(centerOfMass.getX(), centerOfMass.getY());
         canvas.drawPath(path, getFillPaint());
         canvas.drawPath(path, getBorderPaint());
@@ -92,13 +94,17 @@ public abstract class GuiObject {
     /**
      * Turning the path
      */
-    void rotateShapeArrays(double extraAngle) {
+    void rotateShapeArrays(float extraAngle) {
+        Matrix rotationMatrix=new Matrix();
+        float alpha = centerOfMass.getDrehWinkel(direction) + extraAngle;
+        rotationMatrix.postRotate(alpha);
+        this.path.transform(rotationMatrix);
         /*
         if (direction == null || centerOfMass == null) {
             throw new RuntimeException("Class not correctly extended. To rotate there needs to be a center of mass and a direction");
         }
 
-        double alpha = centerOfMass.getDrehWinkel(direction) + extraAngle;
+
         for (int i = 0; i < (x.length + y.length) / 2; i++) {
             int xOld = x[i];
             int yOld = y[i];

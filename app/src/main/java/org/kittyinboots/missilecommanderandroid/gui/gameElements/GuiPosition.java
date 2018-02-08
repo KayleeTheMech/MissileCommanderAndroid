@@ -33,4 +33,18 @@ public class GuiPosition {
     public float getY() {
         return y;
     }
+
+    public float getDrehWinkel(GuiPosition targetPosition) {
+        int vergleichX = -10; // und (y=0)
+        float vectorX = targetPosition.getX() - this.x;
+        float vectorY = targetPosition.getY() - this.y;
+        float skalarProdukt = vergleichX * vectorX;
+        float laengeVector = (float) Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+        float winkel = (float) (180 / Math.PI * Math.acos(skalarProdukt / (10 * laengeVector)));
+        if (vectorY < 0) {
+            return (winkel);
+        } else {
+            return -(winkel);
+        }
+    }
 }

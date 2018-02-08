@@ -24,7 +24,7 @@ public class GuiUfo extends GuiObject {
      */
     GuiUfo(UFO ufo) {
         super(ufo);
-        rotateShapeArrays(Math.PI / 2);
+        rotateShapeArrays(90f);
         initialize();
         fillColor = Color.GREEN;
         borderColor = Color.YELLOW;

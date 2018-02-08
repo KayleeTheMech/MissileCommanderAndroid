@@ -15,7 +15,7 @@ public class GuiMissile extends GuiObject {
 
     GuiMissile(Missile missile) {
         super(missile);
-        rotateShapeArrays(0);
+        rotateShapeArrays(0f);
         initialize();
         fillColor = Color.GRAY;
         borderColor = Color.WHITE;

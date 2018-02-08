@@ -83,8 +83,8 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
         List<GameObject> gameObjects = new ArrayList<>();
         //director.getGameObjects();
         Missile object = new Missile();
-        object.setPosition(new Position(100, 100));
-        object.setTargetVector(new Position(0, 0));
+        object.setPosition(new Position(0, 100));
+        object.setTargetVector(new Position(-50, 0));
         gameObjects.add(object);
         for (GameObject obj : gameObjects) {
             GuiObject graphicalObject = factory.getGUIObject(obj);
