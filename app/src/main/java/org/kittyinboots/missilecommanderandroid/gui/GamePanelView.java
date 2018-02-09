@@ -9,10 +9,12 @@ import android.view.SurfaceHolder;
 
 import com.google.common.eventbus.EventBus;
 
+import org.kittyinboots.missilecommanderandroid.controller.GameThread;
 import org.kittyinboots.missilecommanderandroid.core.Position;
 import org.kittyinboots.missilecommanderandroid.core.SceneDirector;
 import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
 import org.kittyinboots.missilecommanderandroid.core.gameObjects.Missile;
+import org.kittyinboots.missilecommanderandroid.core.gameObjects.UFO;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiMissile;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObject;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObjectFactory;
@@ -25,6 +27,8 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
 
     private static int windowHeight = -1;
     private static int windowWidth = -1;
+    private SurfaceHolder surfaceHolder;
+
     EventBus eventBus;
     SceneDirector director;
     private GuiObjectFactory factory;
@@ -58,9 +62,9 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        Canvas canvas = surfaceHolder.lockCanvas();
-        draw(canvas);
-        surfaceHolder.unlockCanvasAndPost(canvas);
+        GameThread gameThread = new GameThread(director, this, surfaceHolder);
+        gameThread.setRunning(true);
+        gameThread.start();
     }
 
     @Override
@@ -73,24 +77,16 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         windowWidth = this.getMeasuredWidth();
         windowHeight = this.getMeasuredHeight();
-
-        List<GameObject> gameObjects = new ArrayList<>();
-        //director.getGameObjects();
-        Missile object = new Missile();
-        object.setPosition(new Position(0, 100));
-        object.setTargetVector(new Position(-50, 0));
-        gameObjects.add(object);
+        List<GameObject> gameObjects = director.getGameObjects();
         for (GameObject obj : gameObjects) {
             GuiObject graphicalObject = factory.getGUIObject(obj);
             graphicalObject.onDraw(canvas);
         }
-
         if (!director.isGameOngoing()) {
             // draw game over if over
         }

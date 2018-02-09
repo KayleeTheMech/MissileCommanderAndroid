@@ -7,6 +7,8 @@ import android.view.WindowManager;
 
 import com.google.common.eventbus.EventBus;
 
+import org.kittyinboots.missilecommanderandroid.controller.Controller;
+import org.kittyinboots.missilecommanderandroid.controller.GameThread;
 import org.kittyinboots.missilecommanderandroid.core.SceneDirector;
 import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 
@@ -22,6 +24,7 @@ public class MainActivity extends Activity {
         EventBus eventBus = new EventBus();
         SceneDirector director = new SceneDirector(eventBus);
         director.newGame();
-        this.setContentView(new GamePanelView(this, eventBus, director));
+        GamePanelView view = new GamePanelView(this, eventBus, director);
+        this.setContentView(view);
     }
 }

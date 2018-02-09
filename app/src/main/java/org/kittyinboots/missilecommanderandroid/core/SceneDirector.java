@@ -8,6 +8,7 @@ import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
 import org.kittyinboots.missilecommanderandroid.events.GameEvent;
 import org.kittyinboots.missilecommanderandroid.events.GameEventMetaData;
 import org.kittyinboots.missilecommanderandroid.events.GameEventType;
+import org.kittyinboots.missilecommanderandroid.gui.GamePanelView;
 
 import java.util.List;
 import java.util.Observer;
@@ -32,6 +33,9 @@ public class SceneDirector {
         this.eventBus = eventBus;
     }
 
+    public Controller getController(){
+        return  controller;
+    }
     /**
      * Calculates the next frame. Is executed by the Controller.
      */

@@ -24,7 +24,7 @@ public class GuiExplosion extends GuiObject {
         //fixme SCALE radius to resolution
         int radius = this.gameObject.getDetonationRadius();
         int numberOfPoints = (int) (radius * 2 * Math.PI) / 4;
-        double winkelabschnitt = 2 * Math.PI / numberOfPoints;
+        double winkelabschnitt = 360 / numberOfPoints;
 
         List<GuiPosition> points = new ArrayList<>();
         for (int i = 0; i < numberOfPoints; i++) {
