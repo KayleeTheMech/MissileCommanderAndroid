@@ -25,6 +25,11 @@ public class GuiPosition {
         this.y = (int) (GamePanelView.getWindowHeight() - stretchY * boardPosition.getY());
     }
 
+    public Position getPosition() {
+        int boardX = (int) ((this.x * 2 - GamePanelView.getWindowWidth()) / stretchX);
+        int boardY = (int) ((GamePanelView.getWindowHeight() - this.y) / stretchY);
+        return new Position(boardX, boardY);
+    }
 
     public float getX() {
         return x;

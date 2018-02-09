@@ -41,7 +41,6 @@ public class GameThread extends Thread {
                 // Synchronized
                 synchronized (canvas) {
                     this.view.draw(canvas);
-                   // this.view.invalidate();
                 }
             } catch (Exception e) {
                 // Do nothing.
