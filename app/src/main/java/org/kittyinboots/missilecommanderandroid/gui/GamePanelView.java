@@ -10,24 +10,17 @@ import android.view.SurfaceHolder;
 import com.google.common.eventbus.EventBus;
 
 import org.kittyinboots.missilecommanderandroid.controller.GameThread;
-import org.kittyinboots.missilecommanderandroid.core.Position;
 import org.kittyinboots.missilecommanderandroid.core.SceneDirector;
 import org.kittyinboots.missilecommanderandroid.core.gameObjects.GameObject;
-import org.kittyinboots.missilecommanderandroid.core.gameObjects.Missile;
-import org.kittyinboots.missilecommanderandroid.core.gameObjects.UFO;
-import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiMissile;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObject;
 import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiObjectFactory;
-import org.kittyinboots.missilecommanderandroid.gui.gameElements.GuiPosition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback {
 
     private static int windowHeight = -1;
     private static int windowWidth = -1;
-    private SurfaceHolder surfaceHolder;
 
     EventBus eventBus;
     SceneDirector director;
@@ -100,5 +93,5 @@ public class GamePanelView extends SurfaceView implements SurfaceHolder.Callback
     public static int getWindowHeight() {
         return windowHeight;
     }
-    
+
 }
